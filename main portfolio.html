@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>3D Portfolio</title>
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Roboto&display=swap" rel="stylesheet" />
+
+  <style>
+    /* Background and reset */
+    body {
+        
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      color: rgb(230, 230, 230);
+      scroll-behavior: smooth;
+
+      /* Background image with overlay */
+      background: 
+        linear-gradient(rgba(15, 15, 15, 0.75), rgba(15, 15, 15, 0.75)),
+        url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1920&q=80') no-repeat center center fixed;
+      background-size: cover;
+      min-height: 100vh;
+    }
+    
+
+    /* Navbar styling */
+    nav {
+      background: rgba(20, 20, 20, 0.85);
+      padding: 1rem;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.7);
+    }
+
+    nav a {
+      margin: 0 1.25rem;
+      color: rgb(130, 200, 255);
+      font-weight: 600;
+      text-decoration: none;
+      transition: color 0.3s ease;
+      font-family: 'Roboto', sans-serif;
+    }
+
+    nav a:hover {
+      color: rgb(255, 200, 0);
+      text-decoration: underline;
+    }
+
+    /* Sections hover effect with subtle background */
+    section {
+      transition: background 0.5s ease;
+      padding: 2rem 1rem;
+      max-width: 900px;
+      margin: 2rem auto;
+      border-radius: 12px;
+      background: rgba(30, 30, 40, 0.6);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+    }
+
+    #home:hover {
+      background: rgba(46, 46, 77, 0.7);
+    }
+
+    #about:hover {
+      background: rgba(59, 46, 77, 0.7);
+    }
+
+    #education:hover {
+      background: rgba(46, 77, 59, 0.7);
+    }
+
+    #projects:hover {
+      background: rgba(77, 46, 59, 0.7);
+    }
+
+    #cv:hover {
+      background: rgba(46, 59, 77, 0.7);
+    }
+
+    #contact:hover {
+      background: rgba(77, 59, 46, 0.7);
+    }
+
+    /* Card styling */
+    .card {
+      background: rgba(50, 50, 70, 0.85);
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+      transition: transform 0.5s ease;
+      transform-style: preserve-3d;
+      max-width: 600px;
+      margin: 1rem auto;
+      font-size: 1.1rem;
+      line-height: 1.5;
+    }
+
+    .card:hover {
+      transform: rotateY(6deg) rotateX(4deg);
+    }
+
+    /* Headings with Merriweather */
+    h1, h2, h3 {
+      font-family: 'Merriweather', serif;
+      color: rgb(255, 215, 0);
+      margin-bottom: 0.5rem;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+    }
+
+    h2 {
+      font-size: 2rem;
+    }
+
+    h3 {
+      font-size: 1.25rem;
+    }
+
+    /* Project cards */
+    .project-card {
+      width: 280px;
+      height: 350px;
+      background: rgba(40, 40, 60, 0.9);
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.6);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      color: rgb(230, 230, 230);
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+    }
+
+    .project-card:hover {
+      transform: rotateY(8deg) rotateX(6deg) translateZ(10px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+    }
+
+    .project-card img {
+      width: 100%;
+      height: 60%;
+      object-fit: cover;
+      border-bottom: 2px solid rgb(255, 215, 0);
+      border-radius: 15px 15px 0 0;
+    }
+
+    .project-card div {
+      padding: 1rem;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .project-card h3 {
+      margin: 0 0 0.5rem 0;
+      color: rgb(255, 215, 0);
+    }
+
+    .project-card p {
+      color: rgb(200, 200, 200);
+      margin: 0;
+      flex-grow: 1;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      color: rgb(180, 180, 180);
+      font-size: 0.9rem;
+      background: rgba(20, 20, 20, 0.85);
+      box-shadow: inset 0 1px 4px rgba(255,255,255,0.1);
+      margin-top: 3rem;
+    }
+
+    /* Contact links */
+    #contact a {
+      color: rgb(255, 215, 0);
+      text-decoration: none;
+      font-weight: 600;
+      margin: 0 10px;
+      transition: color 0.3s ease;
+    }
+
+    #contact a:hover {
+      color: rgb(130, 200, 255);
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 700px) {
+      .project-card {
+        width: 90%;
+        height: auto;
+        margin: 1rem auto;
+      }
+
+      nav a {
+        margin: 0 0.7rem;
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+<div id="particles-js"></div>
+
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#education">Education</a>
+    <a href="#projects">Projects</a>
+    <a href="#cv">CV</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <section id="home" style="text-align:center; padding:3rem 1rem;">
+    <img src="profile photo.jpg" alt="Your Photo" style="width:120px; height:120px; border-radius:50%; border:3px solid rgb(255, 215, 0); object-fit:cover; margin-bottom:1rem;" />
+    <h1>GANESH SHAHANE</h1>
+    <p style="color: rgb(200, 200, 200); font-weight: 500;">Student Of Master Of Computer Application</p>
+  </section>
+
+  <section id="about">
+    <div class="card">
+      <h2>About Me</h2>
+      <p>
+        I am a passionate creative with a background in design and development. I love building interactive,
+        user-centered experiences that blend technology with art.
+      </p>
+    </div>
+  </section>
+
+  <section id="education">
+    <div class="card">
+      <h2>Education</h2>
+      <ul style="list-style:none; padding:0; color: rgb(210, 210, 210); font-size: 1.05rem;">
+        <li style="margin-bottom:1rem;">
+          <strong>Admitted IN Sanjivani University In 2025 </strong><br />
+          Master In Computer Application, Sanjivani University.
+        </li>
+        <li>
+          <strong>2022 - 2025</strong><br />
+          Bachelor Of Computer Application, Pune University.
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="projects" style="text-align:center;">
+    <h2>Projects</h2>
+    <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:2rem; margin-top:1.5rem;">
+
+      <div class="project-card">
+        <a href="DAIRY PRODUCT FARMING 3.pdf" target="_blank" style="text-decoration:none; color:inherit;">
+          <img src="cow.webp" alt="Project 1" />
+          <div>
+            <h3>Dairy Shop Management System</h3>
+            <p>Creative web with HTML/CSS &amp; PHP.</p>
+          </div>
+        </a>
+      </div>
+
+      <div class="project-card">
+        <a href="https://example.com/project2" target="_blank" style="text-decoration:none; color:inherit;">
+          <img src="Professional-portfolio-736x414.webp" alt="Project 2" />
+          <div>
+            <h3>Creative Portfolio</h3>
+            <p>JavaScript-based animation project.</p>
+          </div>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="cv">
+    <div class="card" style="text-align:center;">
+      <h2>Download My CV</h2>
+      <img src="resume image.jpeg" alt="Resume Image" style="width:100%; height:60%; object-fit:cover; border-radius: 12px;" />
+      <p>Download my resume for more details on experience and skills.</p>
+      <a href="cv.pdf" download aria-label="Download Ganesh Shahane's CV"
+         style="display:inline-block; margin-top:1rem; padding:0.75rem 1.5rem; background: rgb(255, 215, 0); color: #111; border-radius: 8px; text-decoration:none; font-weight: 700; transition: background 0.3s ease;">
+        Download CV
+      </a>
+    </div>
+  </section>
+
+  <section id="contact" style="text-align:center;">
+    <h2>Contact</h2>
+    <p>Email: 
+      <a href="mailto:ganeshshahane2005@gmail.com">ganeshshahane2005@gmail.com</a>
+    </p>
+    <div style="margin-top:1rem;">
+      <a href="https://www.linkedin.com/in/ganesh-shahane-1353792b7" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/ganesh290105" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </section>
+
+  <footer>
+    © 2025 GANESH SHAHANE. All rights reserved.
+  </footer>
+
+</body>
+</html>
